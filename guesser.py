@@ -5,6 +5,7 @@ This program will let the user guess a number between 1 and 100!
 
 import random
 import os
+import sys
 
 playerScore = 0
 language = 0 # 0 is english 1 is polish
@@ -37,7 +38,7 @@ def main():
             main()
 
     if userChoice == 3:
-        print "There will be a quit function"
+        sys.exit()
 
 def main_pl():
     cls()
@@ -64,7 +65,7 @@ def main_pl():
             main_pl()
 
     if userChoice == 3:
-        print "There will be a quit function"
+        sys.exit()
 
 
 def game():
@@ -119,6 +120,7 @@ def gameQuestion():
         cls()
         print "         Thanks for playing!"
         print "         Your Final Score is {}".format(playerScore)
+        sys.exit()
 
 
 def gameQuestion_pl():
@@ -133,6 +135,7 @@ def gameQuestion_pl():
         cls()
         print "         Dzieki za rozgrywke!"
         print "         Twoj ostateczny wynik to: {}".format(playerScore)
+        sys.exit()
 
 
 if __name__ == "__main__":
