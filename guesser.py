@@ -4,43 +4,47 @@ This program will let the user guess a number between 1 and 100!
 """
 
 import random
+import os
+
+playerScore = 0
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def main():
-    print "Guess a number between 1 and 100."
-
-
-
-    randomNumber = random.randint(1, 100)
-    userScore = 0
-
-
+    cls()
     found = False
-    carryOnPlaying = False
+    randomNumber = random.randint(1, 100)
+    while not found:
+        userGuess = input("Your Guess: ")
 
-    while not carryOnPlaying:
-        while not found :
-            userGuess = input("Your Guess: ")
-
-
-            if userGuess == randomNumber:
-                print "You got it!"
-                found = True
-                userScore += 1
-            elif userGuess > randomNumber:
-                print "Guess lower!"
-            else:
-                print "Guess higher!"
-
-        print "Your score: %s" % userScore
-        print " "
-        print " "
-        print " "
-        print "Do you want to carry on Playing?"
-        userAnswer = input("Your Answer: ")
-        if userAnswer == True:
-            carryOnPlaying = False
+        if userGuess == randomNumber:
+            print "You got it!"
+            found = True
+            global playerScore
+            playerScore += 1
+            gameQuestion()
+        elif userGuess > randomNumber:
+            print "Guess lower!"
         else:
-            carryOnPlaying = True
+            print "Guess higher!"
+
+
+
+
+
+def gameQuestion():
+    cls()
+    global playerScore
+    print "         Your Score is {}".format(playerScore)
+    print "Do you want to carry on Playing?"
+    userAnswer = input("Your Answer: ")
+    if userAnswer == True:
+        main()
+    else:
+        cls()
+        print "         Thanks for playing!"
+        print "         Your Final Score is {}".format(playerScore)
 
 
 if __name__ == "__main__":
