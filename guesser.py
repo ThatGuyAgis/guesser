@@ -12,6 +12,49 @@ language = 0 # 0 is english 1 is polish
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
+def check(question):
+    reply = str(raw_input(question+' (y/n): ')).lower().strip()
+    if reply[0] == 'y':
+        return True
+    if reply[0] == 'n':
+        return False
+    else:
+        return yes_or_no("Invalid input! Please use: ")
+
+def check_pl(question):
+    reply = str(raw_input(question+' (y/n): ')).lower().strip()
+    if reply[0] == 'y':
+        return True
+    if reply[0] == 'n':
+        return False
+    else:
+        return yes_or_no("Blad! Uzyj:  ")
+
+def inputNumber(message):
+    while True:
+        try:
+            userInput = int(input(message))
+        except:
+            cls()
+            print("Not an option(has to be a number provided above)")
+            continue
+        else:
+            return userInput
+            break
+
+def inputNumber_pl(message):
+    while True:
+        try:
+            userInput = int(input(message))
+        except:
+            cls()
+            print("Zly Wybor!(Musisz wybrac liczbe podana powyzej)")
+            continue
+        else:
+            return userInput
+            break
+
+
 
 def main():
     cls()
@@ -19,26 +62,18 @@ def main():
     print "__1. Start Game__"
     print "__2. Settings__"
     print "__3. Quit__"
-    userChoice = input("Your choice: ")
-    if userChoice == 1:
-        game()
-    if  userChoice == 2:
-        cls()
-        global language
-        print "__LANGUAGE SELECTION__"
-        print "1. English"
-        print "2. Polish"
-        print "3. Exit without change"
-        language = input("Your choice(1/2/3): ")
-        if language == 1:
-            main()
-        if language == 2:
-            main_pl()
-        if language == 3:
-            main()
+    userChoice = inputNumber("Your choice: ")
+    if 1 <= int(userChoice) <= 3:
+        if userChoice == 1:
+            game()
+        if userChoice == 2:
+            langSelect()
+        if userChoice == 3:
+            sys.exit()
+    else:
+        main()
 
-    if userChoice == 3:
-        sys.exit()
+
 
 def main_pl():
     cls()
@@ -46,34 +81,61 @@ def main_pl():
     print "__1. Zacznij rozgrywke__"
     print "__2. Ustawienia__"
     print "__3. Wyjdz__"
-    userChoice = input("Twoj wybor: ")
-    if userChoice == 1:
-        game_pl()
-    if  userChoice == 2:
-        cls()
-        global language
-        print "__Wybor Jezyka__"
-        print "1. Angielski"
-        print "2. Polski"
-        print "3. Wyjdz bez zmiany"
-        language = input("Twoj wybor(1/2/3): ")
+    userChoice = inputNumber("Twoj wybor: ")
+    if 1 <= int(userChoice) <= 3:
+        if userChoice == 1:
+            game_pl()
+        if userChoice == 2:
+            langSelect_pl()
+        if userChoice == 3:
+            sys.exit()
+    else:
+        main_pl()
+
+def langSelect_pl():
+    cls()
+    global language
+    print "__Wybor Jezyka__"
+    print "1. Angielski"
+    print "2. Polski"
+    print "3. Wyjdz bez zmiany"
+    language = inputNumber("Twoj wybor: ")
+    if 1 <= int(language) == 3:
         if language == 1:
             main()
         if language == 2:
             main_pl()
         if language == 3:
             main_pl()
-
-    if userChoice == 3:
-        sys.exit()
+    else:
+        langSelect_pl()
+def langSelect():
+    cls()
+    global language
+    print "__LANGUAGE SELECTION__"
+    print "1. English"
+    print "2. Polish"
+    print "3. Exit without change"
+    language = inputNumber("Your choice(1/2/3): ")
+    if 1 <= int(language) <= 3:
+        if language == 1:
+            main()
+        if language == 2:
+            main_pl()
+        if language == 3:
+            main()
+    else:
+        langSelect()
 
 
 def game():
     cls()
+    print "___Goal of the Game: Guess a number between 1 and 100___"
+    print "___Score points and spend them as i add features___"
     found = False
     randomNumber = random.randint(1, 100)
     while not found:
-        userGuess = input("Your Guess: ")
+        userGuess = inputNumber("Your Guess: ")
 
         if userGuess == randomNumber:
             print "You got it!"
@@ -92,7 +154,7 @@ def game_pl():
     found = False
     randomNumber = random.randint(1, 100)
     while not found:
-        userGuess = input("Zgadnij liczbe: ")
+        userGuess = inputNumber("Zgadnij liczbe: ")
 
         if userGuess == randomNumber:
             print "Zgadles liczbe!"
@@ -113,13 +175,13 @@ def gameQuestion():
     global playerScore
     print "         Your Score is {}".format(playerScore)
     print "Do you want to carry on Playing?"
-    userAnswer = input("Your Answer(True/False): ")
-    if userAnswer == True:
+    #userAnswer = input("Your Answer(Yes/No): ").lower()
+    if check("Your Answer:") == True:
         game()
     else:
         cls()
-        print "         Thanks for playing!"
-        print "         Your Final Score is {}".format(playerScore)
+        print "         Thank you for playing!!"
+        print "         Your final score: {}".format(playerScore)
         sys.exit()
 
 
@@ -128,8 +190,8 @@ def gameQuestion_pl():
     global playerScore
     print "         Twoj wynik: {}".format(playerScore)
     print "Chcesz grac dalej?"
-    userAnswer = input("Twoj wybor(True/False): ")
-    if userAnswer == True:
+    #userAnswer = input("Twoj wybor(True/False): ")
+    if check_pl("Twoj wybor") == True:
         game_pl()
     else:
         cls()
