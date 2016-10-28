@@ -13,6 +13,21 @@ def cls():
 
 def main():
     cls()
+    print "______Main Menu______"
+    print "__1. Start Game__"
+    print "__2. Settings__"
+    print "__3. Quit__"
+    userChoice = input("Your choice: ")
+    if userChoice == 1:
+        game()
+    if  userChoice == 2:
+        print "There will be settings later!"
+    if userChoice == 3:
+        print "There will be a quit function"
+
+
+def game():
+    cls()
     found = False
     randomNumber = random.randint(1, 100)
     while not found:
@@ -38,9 +53,9 @@ def gameQuestion():
     global playerScore
     print "         Your Score is {}".format(playerScore)
     print "Do you want to carry on Playing?"
-    userAnswer = input("Your Answer: ")
+    userAnswer = input("Your Answer(y/n): ")
     if userAnswer == True:
-        main()
+        game()
     else:
         cls()
         print "         Thanks for playing!"
