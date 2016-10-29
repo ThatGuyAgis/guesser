@@ -7,8 +7,15 @@ import random
 import os
 import sys
 
+
+
 playerScore = 0
 language = 0 # 0 is english 1 is polish
+
+
+
+
+>>>>>>> Stashed changes
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
