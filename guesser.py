@@ -15,7 +15,6 @@ language = 0 # 0 is english 1 is polish
 
 
 
->>>>>>> Stashed changes
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -65,6 +64,12 @@ def inputNumber_pl(message):
 
 def main():
     cls()
+    if os.path.exists("preferences.txt") == True:
+        prefFile = open("preferences.txt", "r")
+        playerScore = prefFile.read()
+        print("Your previous highscore: {}".format(playerScore))
+    else:
+        print("This is your first time playing!")
     print "______Main Menu______"
     print "__1. Start Game__"
     print "__2. Settings__"
@@ -148,7 +153,10 @@ def game():
             print "You got it!"
             found = True
             global playerScore
+            prefFile = open("preferences.txt", "w")
             playerScore += 1
+            prefFile.write('{}'.format(playerScore))
+            prefFile.close()
             gameQuestion()
         elif userGuess > randomNumber:
             print "Guess lower!"
@@ -167,7 +175,9 @@ def game_pl():
             print "Zgadles liczbe!"
             found = True
             global playerScore
+            prefFile = open("preferences.txt", "w")
             playerScore += 1
+            prefFile.write('{}'.format(playerScore))
             gameQuestion_pl()
         elif userGuess > randomNumber:
             print "Zgaduj nizej!"
